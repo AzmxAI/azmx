@@ -22,7 +22,7 @@ Bring your own key from any major provider, or run free models locally via Ollam
 ## Why AZMX
 
 - **Free local AI without an API key.** One-click setup of Ollama + curated coding models (Qwen2.5-Coder, Granite Code — all Apache 2.0). Your prompts never leave the machine.
-- **Or BYOK.** OpenAI, Anthropic, Google, Groq, xAI, Cerebras, DeepSeek, **NVIDIA NIM** (hosted at build.nvidia.com or self-hosted) — any one is enough to start. Keys live in the OS keychain, never in disk files or `localStorage`.
+- **Or BYOK.** OpenAI, Anthropic, Google, Groq, xAI, Cerebras, DeepSeek, **NVIDIA NIM** (hosted at build.nvidia.com or self-hosted), **Azure OpenAI** (any resource + deployment), and any other OpenAI-compatible endpoint (Vertex AI, Bedrock-via-LiteLLM, …) — any one is enough to start. Keys live in the OS keychain, never in disk files or `localStorage`.
 - **GPU-aware agent.** When you're on an NVIDIA machine the agent can read live GPU state via `nvidia-smi` — debug OOM, pick a batch size, fit a model to your VRAM.
 - **Native, lightweight.** ~10 MB installer. No Electron. No telemetry by default.
 - **Real terminal, real editor, real explorer.** xterm.js+WebGL terminal, CodeMirror 6 editor with vim mode + inline AI autocomplete, file tree with git status badges.

@@ -153,9 +153,10 @@ It doesn't read any Ollama config file or talk to ollama.com directly.
 - **Groq** (GPT-OSS 20B — ultra-fast)
 - **DeepSeek** (V4 Flash, V4 Pro)
 - **NVIDIA NIM** — hosted via build.nvidia.com or self-hosted NIM containers. Seed models: Llama 3.1 Nemotron 70B, Llama 3.1 70B Instruct, Qwen2.5-Coder 32B.
+- **Azure OpenAI** — any Azure resource + deployment. First-class preset; URL field + deployment name appear after the key is saved.
 - **LM Studio** (any local model)
 - **Ollama** (any local model)
-- **OpenAI-compatible** endpoints — bring any URL.
+- **OpenAI-compatible** endpoints — bring any URL. Useful for Vertex AI, LiteLLM-fronted Bedrock, vLLM, TGI, etc.
 
 ### What's the default model?
 
@@ -218,6 +219,44 @@ Yes — `/hosts` in the AI panel is exactly this. The slash command expands into
 ### Is there a TensorRT-LLM / Triton / NeMo / W&B / TensorBoard MCP server I can add?
 
 Several community-built ones exist. AZMX doesn't bundle them in the curated catalog yet — the curation contract is "we only ship entries pointing at packages we can verify." Any reachable MCP server (stdio or HTTP/SSE) works via **Settings → Connectors → Custom**. If you find a good one, let us know and we'll add it to the catalog.
+
+---
+
+## Other clouds (Vertex AI, AWS Bedrock, etc.)
+
+### Does AZMX work with Google Vertex AI?
+
+Yes — via the **OpenAI-compatible** provider. Vertex AI exposes an OpenAI-compat surface at:
+
+```
+https://{region}-aiplatform.googleapis.com/v1beta1/projects/{project}/locations/{region}/endpoints/openapi
+```
+
+Auth uses a Google Cloud access token, which expires hourly:
+
+```bash
+gcloud auth print-access-token
+```
+
+For short sessions this is fine — paste the token in the OpenAI-compatible key field. For long-lived production use, mint a long-lived service-account token bound to the Vertex AI user role.
+
+AZMX does **not** ship a labeled Vertex AI preset because the hourly token expiry would make the UX hostile — labeling it as a clean preset would set the wrong expectation. The OpenAI-compatible path with a real token is honest and works.
+
+### Does AZMX work with AWS Bedrock?
+
+Yes — but Bedrock uses AWS SigV4 (not bearer-token auth) and isn't directly OpenAI-compatible per-model. The clean path is to run **[LiteLLM](https://github.com/BerriAI/litellm)** as a proxy in front of Bedrock:
+
+```bash
+litellm --model bedrock/anthropic.claude-3-5-sonnet-20241022-v2:0
+```
+
+LiteLLM exposes an OpenAI-compatible endpoint that handles the SigV4 signing transparently. Point AZMX's **OpenAI-compatible** provider at `http://localhost:4000/v1` (or wherever LiteLLM listens) and the agent now routes through Bedrock.
+
+AZMX does **not** ship a Bedrock preset because doing SigV4 in-app would require bundling AWS SDK chunks and managing IAM credential lifecycles — neither fits the BYOK posture. LiteLLM is the clean industry-standard bridge.
+
+### What about Azure OpenAI?
+
+That **is** a first-class preset — see the BYOK section above. Paste the key, fill in your resource URL (`https://my-resource.openai.azure.com/openai/v1`) and deployment name, pick **Azure OpenAI (deployment)** in the default-model dropdown.
 
 ---
 
