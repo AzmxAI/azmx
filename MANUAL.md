@@ -25,6 +25,8 @@ End-to-end reference for AZMX AI. For install instructions see [SETUP.md](SETUP.
 - [Sub-agents](#sub-agents)
 - [Connectors (MCP)](#connectors-mcp)
 - [Free local AI (Ollama)](#free-local-ai-ollama)
+- [NVIDIA NIM](#nvidia-nim)
+- [GPU awareness](#gpu-awareness)
 - [Project switcher](#project-switcher)
 - [Command palette & quick-open](#command-palette--quick-open)
 - [AZMX.md — project memory](#azmxmd--project-memory)
@@ -203,6 +205,7 @@ Type **`#`** to open a picker over **snippets** (reusable instruction blocks) an
 | `/commit` | Drafts a Conventional Commit from `git diff [--cached]` and types `git commit -m "…"` at the active terminal's prompt. |
 | `/index` | Triggers a semantic-search index build for the workspace. |
 | `/macro` | Opens the macro picker (parameterized prompt templates). |
+| `/sbatch <description>` | Drafts a Slurm batch script for the described training/inference job (GPU count, time limit, partition, srun wrapping). Output appears in chat as a fenced shell block — multi-line scripts don't fit at the prompt. |
 
 Custom slash commands and snippets are managed in **Settings → Agents**.
 
@@ -276,6 +279,7 @@ The agent has ~20 tools across these groups:
 | `terminal_write` | yes | Type into the active terminal as if you typed it. |
 | `todo_write` | auto | Persist a plan (single in-progress invariant). |
 | `run_subagent` | auto | Spawn an isolated read-only sub-agent. |
+| `gpu_status` | auto | Live NVIDIA GPU state via `nvidia-smi` — per-GPU memory/utilization/temp/power/driver. Returns `{ available: false }` cleanly on non-NVIDIA machines. |
 | `suggest_command` | auto | Types a single shell command at the active terminal's prompt. |
 | `open_preview` | auto | Opens a URL as a preview tab. |
 | `mcp__<server>__<tool>` | varies | Tools exposed by any running MCP server. |
@@ -387,6 +391,58 @@ The status-bar **Local** pill turns amber if the daemon goes away mid-session. C
 | Windows/Linux CPU-only | 5–20 tok/s ⚠️ |
 
 If your machine is in the ⚠️ band and you'll use AI heavily, **either** drop to a smaller model (Qwen2.5-Coder 1.5B for autocomplete, or 3B variants for chat) **or** add a BYOK key alongside.
+
+---
+
+## NVIDIA NIM
+
+NIM (NVIDIA Inference Microservices) is NVIDIA's OpenAI-compatible inference surface — both the hosted free tier at [build.nvidia.com](https://build.nvidia.com) and self-hosted enterprise NIM containers expose the same `/v1/chat/completions` shape. AZMX has NIM as a first-class provider.
+
+### Hosted vs self-hosted
+
+| | Hosted (build.nvidia.com) | Self-hosted (NIM container) |
+| --- | --- | --- |
+| Endpoint | `https://integrate.api.nvidia.com/v1` (AZMX default) | Whatever your container exposes (`https://nim.internal/v1`, …) |
+| Auth | `nvapi-…` token from build.nvidia.com | Same token, or your own auth |
+| Rate limits | Per build.nvidia.com tier | None — you own the compute |
+| Privacy | Prompts hit NVIDIA's hosted endpoint | Prompts stay inside your network |
+
+Both paths use the same AZMX **NVIDIA NIM** provider entry; only the URL differs.
+
+### Setup
+
+1. Paste your `nvapi-…` key in **Settings → Models → API keys → NVIDIA NIM**.
+2. (Self-hosted only) A **NVIDIA NIM endpoint** block appears below the API keys grid the moment the key is saved. Point it at your container's `/v1` URL.
+3. Default-model dropdown — pick a NIM model (Llama 3.1 Nemotron 70B, Llama 3.1 70B Instruct, Qwen2.5-Coder 32B all ship as seed entries).
+
+### Seed models
+
+| Model | Context | Best for |
+| --- | --- | --- |
+| `nvidia/llama-3.1-nemotron-70b-instruct` | 128k | Balanced; NVIDIA's flagship Nemotron variant |
+| `meta/llama-3.1-70b-instruct` | 128k | General chat / reasoning |
+| `qwen/qwen2.5-coder-32b-instruct` | 32k | Coding-heavy tasks |
+
+You can add other model IDs by hand if your NIM container exposes them — AZMX will route any model id you select to the configured NIM endpoint.
+
+### How NIM interacts with the rest of AZMX
+
+- **Subagents** — when the active model is a NIM model, subagent calls go to NIM too.
+- **`/commit`, `/init`, cmdgen, autocomplete** — same.
+- **gpu_status** — NIM is hosted inference, but the agent can still read your local GPU via `nvidia-smi`. Useful for "I'm running a local fine-tune on GPU 0, route inference to NIM on GPU 1".
+
+---
+
+## GPU awareness
+
+The agent has a read-only `gpu_status` tool that wraps `nvidia-smi`. Returns per-GPU memory (used / total / free MiB), utilization (% compute, % memory), temperature, fan, power draw / limit, and driver version. Auto-executes (no approval).
+
+Use cases:
+- **OOM debugging**: "I just hit a CUDA OOM" → the agent reads GPU state and suggests the next batch size.
+- **Model picking**: "Which Ollama model will fit?" → the agent reads free VRAM and picks accordingly.
+- **Multi-GPU triage**: "Which GPU has the lowest utilization?" → ranked answer.
+
+On machines without NVIDIA hardware (macOS, AMD/Intel Linux, no `nvidia-smi` in PATH), the tool returns `{ available: false }` and the agent moves on — no error message in your chat.
 
 ---
 

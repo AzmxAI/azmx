@@ -131,9 +131,29 @@ When AZMX starts for the first time, it runs a brief 4-step tour. The two AI set
 3. Paste the key. It's written to your OS keychain (Keychain.app on macOS, Credential Manager on Windows, libsecret on Linux).
 4. The composer becomes live. You can set the default model from the picker at the top of the same screen.
 
-### Combining the two
+### Option C — NVIDIA NIM (hosted or self-hosted)
 
-You can configure both. AZMX uses whichever model is currently selected — see **MANUAL.md → AI panel → Model picker** for switching between them on a per-conversation basis.
+NIM (NVIDIA Inference Microservices) is NVIDIA's OpenAI-compatible inference service. AZMX has a first-class NIM provider.
+
+**Hosted (build.nvidia.com):**
+
+1. Sign up at [build.nvidia.com](https://build.nvidia.com) — there's a free tier with rate limits.
+2. Generate an API key starting with `nvapi-…`.
+3. In AZMX: **Settings → Models → API keys → NVIDIA NIM → paste**.
+4. Top of Models page → **Default model** → pick a NIM model (Llama 3.1 Nemotron 70B is recommended).
+
+**Self-hosted NIM container:**
+
+1. Run your NIM container per [NVIDIA's docs](https://docs.nvidia.com/nim/large-language-models/latest/getting-started.html). The container exposes `/v1/chat/completions`.
+2. In AZMX: **Settings → Models** — paste the same `nvapi-…` token (or whatever auth your container needs) in the **NVIDIA NIM** card.
+3. Once a key is set, a **NVIDIA NIM endpoint** field appears below the API keys grid. Point it at your NIM container's `/v1` URL (e.g. `https://nim.internal.corp/v1`).
+4. Pick a NIM model from the default-model dropdown.
+
+Hosted and self-hosted use the same provider entry — the URL is the only thing that differs.
+
+### Combining the paths
+
+You can configure local AI + BYOK + NIM all at once. AZMX uses whichever model is currently selected — see **MANUAL.md → AI panel → Model picker** for switching between them on a per-conversation basis.
 
 ---
 

@@ -152,6 +152,7 @@ It doesn't read any Ollama config file or talk to ollama.com directly.
 - **Cerebras** (GPT-OSS 120B — ultra-fast)
 - **Groq** (GPT-OSS 20B — ultra-fast)
 - **DeepSeek** (V4 Flash, V4 Pro)
+- **NVIDIA NIM** — hosted via build.nvidia.com or self-hosted NIM containers. Seed models: Llama 3.1 Nemotron 70B, Llama 3.1 70B Instruct, Qwen2.5-Coder 32B.
 - **LM Studio** (any local model)
 - **Ollama** (any local model)
 - **OpenAI-compatible** endpoints — bring any URL.
@@ -167,6 +168,46 @@ Yes. Configure any number of API keys. Switch which model the active session use
 ### Do I need a paid plan with the provider?
 
 You need API access. Most providers offer free tiers for low-volume usage. AZMX doesn't add anything on top — the cost-per-token is whatever the provider charges.
+
+---
+
+## NVIDIA
+
+### What's NIM and why does AZMX support it?
+
+NIM (NVIDIA Inference Microservices) is NVIDIA's OpenAI-compatible inference surface. Hosted at [build.nvidia.com](https://build.nvidia.com) (free tier available, paid for production) and also runnable on-prem as a containerized service. AZMX treats NIM as a first-class provider — the same shape as OpenAI / Anthropic / etc. — so every NIM customer can route their AZMX agent at their existing NIM endpoint without any third-party AI provider in the loop.
+
+### How do I point AZMX at my self-hosted NIM?
+
+1. Paste an `nvapi-…` token (or whatever auth your container expects) in **Settings → Models → NVIDIA NIM**.
+2. A **NVIDIA NIM endpoint** field appears below the API keys grid the moment the key is saved.
+3. Set it to your container's `/v1` URL (e.g. `https://nim.internal/v1`).
+
+### What does the `gpu_status` tool actually do?
+
+It runs `nvidia-smi --query-gpu=…` under the hood and returns structured per-GPU state to the agent: name, memory (used / total / free), utilization (compute and memory), temperature, fan, power draw/limit, driver version. Read-only, auto-execute, no approval needed.
+
+Useful for "I just OOM'd on this batch size", "which model will fit in my free VRAM", "which GPU has the lowest load right now". On machines without NVIDIA hardware the tool returns `{ available: false }` and the agent moves on quietly.
+
+### Can the agent talk to my Kubernetes cluster?
+
+Yes — via MCP. In **Settings → Connectors → Browse catalog** there's a **Kubernetes** entry that wraps a community `mcp-server-kubernetes`. It uses your existing `~/.kube/config` (or a path you specify), so whatever your current `kubectl` can see, the agent can list, describe, log-tail, etc.
+
+Useful for managing NIM deployments, Triton inference services, GPU operator state, and any other K8s-resident AI workload.
+
+### Can the agent draft a Slurm job for me?
+
+Yes — type `/sbatch <description>` in the AI panel. The agent drafts a complete `#!/bin/bash` script with the right SBATCH directives (job-name, GPUs, partition, time limit, srun wrapping), and prints it as a fenced shell block in chat. You review and submit; AZMX never runs `sbatch` itself.
+
+### Does AZMX work on DGX / HGX / Jetson?
+
+Yes. AZMX is a regular desktop app — anywhere you can run a webview-based Linux/macOS/Windows app, you can run AZMX. SSH host management makes the typical workflow ("desktop AZMX → SSH to GPU node → work") fast.
+
+For Jetson: the AppImage works on AArch64 Linux. The free local AI flow (Ollama) is also AArch64-aware. Performance is constrained by the device's memory but Qwen2.5-Coder 1.5B runs respectably on Orin-class boards.
+
+### Is there a TensorRT-LLM / Triton / NeMo / W&B / TensorBoard MCP server I can add?
+
+Several community-built ones exist. AZMX doesn't bundle them in the curated catalog yet — the curation contract is "we only ship entries pointing at packages we can verify." Any reachable MCP server (stdio or HTTP/SSE) works via **Settings → Connectors → Custom**. If you find a good one, let us know and we'll add it to the catalog.
 
 ---
 
