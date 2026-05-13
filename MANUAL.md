@@ -106,7 +106,9 @@ If a command prints a `http://localhost:PORT` URL, a pill appears in the status 
 If a command exits non-zero, a small amber pill floats above the terminal: **"Ask AZMX AI to fix"**. Clicking prefills the AI composer with the failure tail.
 
 ### SSH
-**⌘⇧S** opens an SSH connection picker. Saved hosts and ad-hoc `user@host[:port]` are supported. Connect runs `ssh -t` in a real PTY tab; reconnects on the same leaf re-use the same args.
+**⌘⇧S** opens the fast SSH connection picker — saved hosts and ad-hoc `user@host[:port]` are supported. Connect runs `ssh -t` in a real PTY tab; reconnects on the same leaf re-use the same args.
+
+**⌘⇧H** opens the full **SSH hosts manager** — CRUD across saved hosts plus optional cluster metadata (GPU count, GPU model, scheduler, labels). The metadata feeds the AI agent's context and the `/hosts` multi-host GPU poll.
 
 ### True color / web links / 5k scrollback
 xterm.js with WebGL renderer. 5,000 line scrollback per pane.
@@ -206,6 +208,7 @@ Type **`#`** to open a picker over **snippets** (reusable instruction blocks) an
 | `/index` | Triggers a semantic-search index build for the workspace. |
 | `/macro` | Opens the macro picker (parameterized prompt templates). |
 | `/sbatch <description>` | Drafts a Slurm batch script for the described training/inference job (GPU count, time limit, partition, srun wrapping). Output appears in chat as a fenced shell block — multi-line scripts don't fit at the prompt. |
+| `/hosts [--label tag]` | Polls `nvidia-smi` across all saved SSH hosts (or only those matching the optional label). Returns a single markdown table with per-GPU memory and utilization. Uses `bash_run` under the hood — each remote call is its own approval. |
 
 Custom slash commands and snippets are managed in **Settings → Agents**.
 
@@ -583,7 +586,8 @@ Build version, license link, links to docs.
 | **AI** | ⌘L | Toggle AI panel |
 | | ⌘⇧A | Ask AI about selection |
 | | ⌘; | Suggest shell command |
-| **SSH** | ⌘⇧S | SSH connect picker |
+| **SSH** | ⌘⇧S | SSH connect picker (fast) |
+| | ⌘⇧H | SSH hosts manager (CRUD + cluster metadata) |
 | **View** | ⌘B | Toggle sidebar |
 
 Rebind from **Settings → Shortcuts**.

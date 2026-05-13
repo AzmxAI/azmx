@@ -201,9 +201,13 @@ Yes — type `/sbatch <description>` in the AI panel. The agent drafts a complet
 
 ### Does AZMX work on DGX / HGX / Jetson?
 
-Yes. AZMX is a regular desktop app — anywhere you can run a webview-based Linux/macOS/Windows app, you can run AZMX. SSH host management makes the typical workflow ("desktop AZMX → SSH to GPU node → work") fast.
+Yes. AZMX is a regular desktop app — anywhere you can run a webview-based Linux/macOS/Windows app, you can run AZMX. The **SSH hosts manager** (⌘⇧H) lets you save each cluster target with GPU count, GPU model, scheduler hint (Slurm / Kubernetes / None), and free-form labels. The `/hosts` slash command then polls `nvidia-smi` across saved hosts and prints one markdown table.
 
 For Jetson: the AppImage works on AArch64 Linux. The free local AI flow (Ollama) is also AArch64-aware. Performance is constrained by the device's memory but Qwen2.5-Coder 1.5B runs respectably on Orin-class boards.
+
+### Can the agent talk to multiple GPU hosts in one prompt?
+
+Yes — `/hosts` in the AI panel is exactly this. The slash command expands into a structured agent prompt that calls `bash_run` per saved host (each requires approval — so you can decline individual remotes), runs `nvidia-smi` over SSH, and aggregates into one table. Add `--label training` to scope to one tag.
 
 ### Is there a TensorRT-LLM / Triton / NeMo / W&B / TensorBoard MCP server I can add?
 
