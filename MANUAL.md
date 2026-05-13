@@ -283,6 +283,7 @@ The agent has ~20 tools across these groups:
 | `todo_write` | auto | Persist a plan (single in-progress invariant). |
 | `run_subagent` | auto | Spawn an isolated read-only sub-agent. |
 | `gpu_status` | auto | Live NVIDIA GPU state via `nvidia-smi` — per-GPU memory/utilization/temp/power/driver. Returns `{ available: false }` cleanly on non-NVIDIA machines. |
+| `gpu_profile_summary` | auto | Analyze an Nsight profile dump (`.nsys-rep` / `.qdrep` / `.ncu-rep`). Wraps `nsys stats` or `ncu --csv` depending on extension; defaults to the `kernels` report for nsys. Surfaces hotspots; agent presents the top 5–10 as a markdown table. |
 | `suggest_command` | auto | Types a single shell command at the active terminal's prompt. |
 | `open_preview` | auto | Opens a URL as a preview tab. |
 | `mcp__<server>__<tool>` | varies | Tools exposed by any running MCP server. |
@@ -446,6 +447,17 @@ Use cases:
 - **Multi-GPU triage**: "Which GPU has the lowest utilization?" → ranked answer.
 
 On machines without NVIDIA hardware (macOS, AMD/Intel Linux, no `nvidia-smi` in PATH), the tool returns `{ available: false }` and the agent moves on — no error message in your chat.
+
+### Profile-dump analysis
+
+For deeper performance work, AZMX wraps NVIDIA's profilers as the `gpu_profile_summary` tool:
+
+- `@`-mention or drag a `.nsys-rep` / `.qdrep` (Nsight Systems trace) or `.ncu-rep` (Nsight Compute report).
+- AZMX recognizes the extension, skips the binary-read attempt, and prefills a prompt the agent will pick up.
+- The agent calls `gpu_profile_summary` with the path; the tool runs `nsys stats --report cuda_gpu_kern_sum --format csv` (or `ncu --import … --csv`) and feeds the result back as CSV.
+- The agent summarizes the top 5–10 hotspots as a compact markdown table rather than dumping raw CSV at you.
+
+Requires the Nsight CLI to be installed locally (`nsys` for Nsight Systems, `ncu` for Nsight Compute). When the CLI isn't on `PATH`, the tool returns the install URL in its `reason` string and the agent surfaces it directly — no retry loop.
 
 ---
 

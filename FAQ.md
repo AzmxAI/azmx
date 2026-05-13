@@ -205,6 +205,12 @@ Yes. AZMX is a regular desktop app — anywhere you can run a webview-based Linu
 
 For Jetson: the AppImage works on AArch64 Linux. The free local AI flow (Ollama) is also AArch64-aware. Performance is constrained by the device's memory but Qwen2.5-Coder 1.5B runs respectably on Orin-class boards.
 
+### Can the agent analyze an Nsight profile dump?
+
+Yes — that's exactly what `gpu_profile_summary` is for. `@`-mention or drag a `.nsys-rep` / `.qdrep` (Nsight Systems trace) or `.ncu-rep` (Nsight Compute report) into the AI panel. The agent calls the tool, which wraps `nsys stats --format csv` or `ncu --csv` (chosen by extension), and presents the top hotspots as a compact markdown table.
+
+Requires the relevant Nsight CLI to be installed locally (`nsys` from Nsight Systems, `ncu` from Nsight Compute). If absent, the tool returns the install URL and the agent points you at it — no retry loop.
+
 ### Can the agent talk to multiple GPU hosts in one prompt?
 
 Yes — `/hosts` in the AI panel is exactly this. The slash command expands into a structured agent prompt that calls `bash_run` per saved host (each requires approval — so you can decline individual remotes), runs `nvidia-smi` over SSH, and aggregates into one table. Add `--label training` to scope to one tag.
