@@ -34,13 +34,13 @@ Native desktop app. Bring any AI key — or run free local models. ~10&nbsp;MB. 
 ## Install
 
 ```bash
-# macOS · Homebrew
-brew install --cask azmx
+# macOS — Homebrew (live now via our tap; in homebrew-cask review)
+brew install --cask AzmxAI/azmx/azmx
 
-# macOS / Linux · one-line installer
-curl -sSL https://azmx.ai/install | sh
+# macOS / Linux — one-line installer (live)
+curl -fsSL https://azmx.ai/install | sh
 
-# Windows · winget
+# Windows — winget (manifest submitted to microsoft/winget-pkgs; live after review)
 winget install AzmxAI.AZMX
 ```
 
