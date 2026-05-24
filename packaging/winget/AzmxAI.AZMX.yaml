@@ -1,0 +1,6 @@
+# Version manifest — winget v1.6 schema
+PackageIdentifier: AzmxAI.AZMX
+PackageVersion: 0.22.5
+DefaultLocale: en-US
+ManifestType: version
+ManifestVersion: 1.6.0
