@@ -42,11 +42,11 @@ Depends on the model you've selected:
 
 ### Where are API keys stored?
 
-In the OS keychain — **Keychain Access** on macOS, **Credential Manager** on Windows, **libsecret** on Linux. Under the service name `azmx-ai`. They never touch disk in plain files, `localStorage`, or AZMX's settings JSON.
+In a private user-only (`0600` on Unix) app-local `secrets.json` file inside the AZMX data directory — never in the OS keychain, `localStorage`, or AZMX's plain settings JSON. The OS keychain was removed in 2026-05-15 because the Keychain ACL on macOS re-prompted on every build re-sign, which broke the experience for every unsigned / CI / ad-hoc build.
 
 ### What about MCP server tokens?
 
-The same. OAuth Client Secret for HTTP MCP servers and any per-server env-var secret declared by a catalog entry are stored in the OS keychain (`mcp.<serverId>.oauthClientSecret` and `mcp.<serverId>.secret.<envName>` respectively), never in `azmx-mcp.json`.
+The same. OAuth Client Secrets for HTTP MCP servers and any per-server env-var secret declared by a catalog entry live in the same `secrets.json` file (`mcp.<serverId>.oauthClientSecret` and `mcp.<serverId>.secret.<envName>` respectively), never in `azmx-mcp.json`.
 
 ### Can the AI agent read my .env / .ssh files?
 
@@ -55,7 +55,6 @@ No. AZMX maintains a security deny-list in `lib/security.ts` that refuses any re
 - `.env` / `.env.*`
 - `.ssh/*`
 - `credentials*`
-- The macOS keychain support directories
 - Other obvious secret paths
 
 The deny-list applies to both the `read_file` tool and write paths (no `edit` of these files either). It cannot be bypassed by the agent.
@@ -78,7 +77,7 @@ No. The binaries are free to download for personal and commercial use, but redis
 
 ### Is the source open?
 
-No, AZMX AI itself is proprietary. The release artifacts (installers + auto-updater manifest) live in [this repository](https://github.com/drvt69talati/azmx-ai-releases); the source repository is private.
+No, AZMX AI itself is proprietary. The release artifacts (installers + auto-updater manifest) live in [this repository](https://github.com/AzmxAI/azmx); the source repository is private.
 
 ### What about the models?
 
@@ -372,7 +371,7 @@ Not yet. MCP is the de facto plugin surface — anything you want to expose to t
 
 ### Auto-updater doesn't find new versions
 
-Check `https://github.com/drvt69talati/azmx-ai-releases/releases/latest/download/latest.json` — it should return JSON. If 404, the latest release didn't publish the manifest correctly; file an issue.
+Check `https://github.com/AzmxAI/azmx/releases/latest/download/latest.json` — it should return JSON. If 404, the latest release didn't publish the manifest correctly; file an issue.
 
 ### The Ollama pill in the status bar is amber
 
@@ -383,7 +382,7 @@ The daemon is unreachable. Check:
 
 ### My API key works in the provider's web UI but AZMX says "no key configured"
 
-Confirm the keychain entry: macOS users can open **Keychain Access**, search `azmx-ai`, and look for a row with the right provider account. On Windows: **Credential Manager → Windows Credentials**. If the entry is missing or the value is empty, re-paste the key in Settings → Models.
+Confirm the entry made it to disk. Inspect `~/Library/Application Support/app.azmx.ai/secrets.json` on macOS, `~/.config/app.azmx.ai/secrets.json` on Linux, or `%APPDATA%\app.azmx.ai\secrets.json` on Windows. If the file is missing or the key is absent, re-paste it in Settings → Models. Never share this file's contents.
 
 ### The agent edited a file I didn't approve
 
@@ -406,5 +405,5 @@ Quit AZMX. Delete the support directory (see [SETUP.md → Where data lives](SET
 
 - **Manual**: [MANUAL.md](MANUAL.md)
 - **Install / setup**: [SETUP.md](SETUP.md)
-- **Latest release & changelog**: [releases](https://github.com/drvt69talati/azmx-ai-releases/releases)
+- **Latest release & changelog**: [releases](https://github.com/AzmxAI/azmx/releases)
 - **Bug reports**: open an issue on this repository.

@@ -334,7 +334,7 @@ Click **Custom** to add any MCP server by hand. Fields:
 - **For HTTP**: URL, headers, optional OAuth Client ID/Secret (Beta)
 - **Auto-start on launch** toggle
 
-OAuth Client Secret values are stored in the OS keychain under `mcp.<serverId>.oauthClientSecret`, never on disk in `azmx-mcp.json`. The full OAuth flow itself is groundwork-only at present.
+OAuth Client Secret values are stored in the app-local `secrets.json` (`0600`, user-only) under `mcp.<serverId>.oauthClientSecret`, never in `azmx-mcp.json`. The full OAuth flow itself is groundwork-only at present.
 
 ### Auto-imports
 
@@ -559,7 +559,7 @@ Searchable list of every shortcut. Click a row to rebind. **Reset to default** r
 
 ### Models
 - **Default model** — picker grouped by provider; disabled rows when no key is configured.
-- **API keys** — one card per cloud provider. Saved keys live in the OS keychain.
+- **API keys** — one card per cloud provider. Saved keys live in a private app-local `secrets.json` (`0600`, user-only) — never the OS keychain.
 - **Free local AI · Ollama** — base URL, installed-model manager, Pull another.
 - **Editor autocomplete** — provider + model picker, LM Studio base URL.
 
@@ -623,4 +623,4 @@ To opt out of the prompt, ignore it — AZMX never auto-installs without confirm
 
 - **[SETUP.md](SETUP.md)** — install instructions, troubleshooting.
 - **[FAQ.md](FAQ.md)** — common questions about privacy, licensing, performance, integrations.
-- **[Releases](https://github.com/drvt69talati/azmx-ai-releases/releases)** — latest changelog and downloads.
+- **[Releases](https://github.com/AzmxAI/azmx/releases)** — latest changelog and downloads.

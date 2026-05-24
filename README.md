@@ -2,7 +2,7 @@
   <h1>AZMX AI</h1>
   <p><strong>A fast, local-first AI terminal for macOS, Linux, and Windows.</strong></p>
   <p>
-    <a href="https://github.com/drvt69talati/azmx-ai-releases/releases/latest">Download latest</a> ·
+    <a href="https://github.com/AzmxAI/azmx/releases/latest">Download latest</a> ·
     <a href="MANUAL.md">User manual</a> ·
     <a href="SETUP.md">Install & setup</a> ·
     <a href="FAQ.md">FAQ</a>
@@ -13,7 +13,7 @@
 
 AZMX AI is a native AI-first terminal that **works out of the box with free local models** — no API key, no signup, no cloud roundtrip. It pairs a real PTY backend with a modern UI: multi-tab terminals, an integrated code editor, a file explorer, and a first-class AI side-panel.
 
-Bring your own key from any major provider, or run free models locally via Ollama. The installer is ~10 MB. API keys live in your OS keychain. Telemetry is off by default.
+Bring your own key from any major provider, or run free models locally via Ollama. The installer is ~10 MB. API keys live in a user-only (`0600`) app-local file — never in the OS keychain, `localStorage`, or plain settings. Telemetry is off by default.
 
 > The application source is proprietary and not hosted here. **This repository exists only to publish release artifacts.** Installers and the auto-updater manifest are attached to each tagged release.
 
@@ -22,7 +22,7 @@ Bring your own key from any major provider, or run free models locally via Ollam
 ## Why AZMX
 
 - **Free local AI without an API key.** One-click setup of Ollama + curated coding models (Qwen2.5-Coder, Granite Code — all Apache 2.0). Your prompts never leave the machine.
-- **Or BYOK.** OpenAI, Anthropic, Google, Groq, xAI, Cerebras, DeepSeek, **NVIDIA NIM** (hosted at build.nvidia.com or self-hosted), **Azure OpenAI** (any resource + deployment), and any other OpenAI-compatible endpoint (Vertex AI, Bedrock-via-LiteLLM, …) — any one is enough to start. Keys live in the OS keychain, never in disk files or `localStorage`.
+- **Or BYOK.** OpenAI, Anthropic, Google, Groq, xAI, Cerebras, DeepSeek, **NVIDIA NIM** (hosted at build.nvidia.com or self-hosted), **Azure OpenAI** (any resource + deployment), and any other OpenAI-compatible endpoint (Vertex AI, Bedrock-via-LiteLLM, …) — any one is enough to start. Keys live in a private user-only (`0600`) app-local file — never in the OS keychain, plain settings, or `localStorage`.
 - **GPU-aware agent.** When you're on an NVIDIA machine the agent can read live GPU state via `nvidia-smi` — debug OOM, pick a batch size, fit a model to your VRAM.
 - **Native, lightweight.** ~10 MB installer. No Electron. No telemetry by default.
 - **Real terminal, real editor, real explorer.** xterm.js+WebGL terminal, CodeMirror 6 editor with vim mode + inline AI autocomplete, file tree with git status badges.
@@ -33,7 +33,7 @@ Bring your own key from any major provider, or run free models locally via Ollam
 
 ## Download
 
-Pick the installer for your platform from the **[latest release](https://github.com/drvt69talati/azmx-ai-releases/releases/latest)**:
+Pick the installer for your platform from the **[latest release](https://github.com/AzmxAI/azmx/releases/latest)**:
 
 | Platform | File |
 | --- | --- |
@@ -65,7 +65,7 @@ Prefer BYOK? Skip step 2's button and use the BYOK step instead. Both paths land
 | **[SETUP.md](SETUP.md)** | Install per platform, troubleshooting, first-run setup |
 | **[MANUAL.md](MANUAL.md)** | Full end-to-end feature reference — every panel, every shortcut, every workflow |
 | **[FAQ.md](FAQ.md)** | Common questions: privacy, licensing, performance, model recommendations, integrations |
-| **[CHANGELOG](https://github.com/drvt69talati/azmx-ai-releases/releases)** | What changed in each release |
+| **[CHANGELOG](https://github.com/AzmxAI/azmx/releases)** | What changed in each release |
 
 ---
 

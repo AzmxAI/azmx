@@ -11,7 +11,7 @@ This page covers installation per platform, the first-run experience, and the mo
 - Apple Silicon recommended for local AI inference (Metal acceleration). Intel works but inference is CPU-bound.
 
 ### Install
-1. Download `AZMX.AI_<version>_aarch64.dmg` (Apple Silicon) or `_x64.dmg` (Intel) from the [latest release](https://github.com/drvt69talati/azmx-ai-releases/releases/latest).
+1. Download `AZMX.AI_<version>_aarch64.dmg` (Apple Silicon) or `_x64.dmg` (Intel) from the [latest release](https://github.com/AzmxAI/azmx/releases/latest).
 2. Open the `.dmg` and drag **AZMX AI** to **Applications**.
 3. Launch from Applications.
 
@@ -32,7 +32,7 @@ rm -rf "$HOME/Library/Application Support/app.azmx.ai"
 rm -rf "$HOME/Library/Caches/app.azmx.ai"
 ```
 
-(API keys live in the macOS Keychain under the service name `azmx-ai` — they persist after uninstall unless you remove them via **Keychain Access.app**.)
+(API keys live in `~/Library/Application Support/app.azmx.ai/secrets.json` — `0600` user-only. They persist if you keep that folder; delete it to wipe them.)
 
 ---
 
@@ -99,7 +99,7 @@ Remove-Item -Recurse "$env:APPDATA\app.azmx.ai"
 Remove-Item -Recurse "$env:LOCALAPPDATA\app.azmx.ai"
 ```
 
-(API keys live in the Windows Credential Manager under the service `azmx-ai` — they persist after uninstall unless removed via **Control Panel → Credential Manager**.)
+(API keys live in `%APPDATA%\app.azmx.ai\secrets.json` — readable only by your user account. They persist if you keep that folder; delete it to wipe them.)
 
 ---
 
@@ -128,7 +128,7 @@ When AZMX starts for the first time, it runs a brief 4-step tour. The two AI set
 
 1. On step 3 of the tour, click **Open Settings → AI**.
 2. Find the provider you want to use (OpenAI, Anthropic, Google, etc.) in the **API keys** grid.
-3. Paste the key. It's written to your OS keychain (Keychain.app on macOS, Credential Manager on Windows, libsecret on Linux).
+3. Paste the key. It's written to a private user-only (`0600`) app-local `secrets.json` file in your AZMX data directory — never the OS keychain, `localStorage`, or plain settings.
 4. The composer becomes live. You can set the default model from the picker at the top of the same screen.
 
 ### Option C — NVIDIA NIM (hosted or self-hosted)
@@ -161,7 +161,7 @@ You can configure local AI + BYOK + NIM all at once. AZMX uses whichever model i
 
 | Item | Location |
 | --- | --- |
-| **API keys** | OS keychain (`azmx-ai` service) |
+| **API keys** | App-local `secrets.json` (`0600`, user-only) in the AZMX data dir |
 | **Settings / preferences** | `~/Library/Application Support/app.azmx.ai/azmx-settings.json` (macOS) / `~/.config/app.azmx.ai/azmx-settings.json` (Linux) / `%APPDATA%\app.azmx.ai\azmx-settings.json` (Windows) |
 | **MCP server configs** | Same dir, `azmx-mcp.json` |
 | **AI sessions** | Same dir, `azmx-ai-sessions.json` + `messages:<sessionId>` entries |
@@ -182,7 +182,7 @@ Older release. The fix shipped in v0.7.1+ — download the latest release.
 WKWebView blocked the bundled stylesheets. Fixed in v0.8.2+ (`stripCrossoriginFromAssets` Vite plugin). Download the latest release.
 
 ### Auto-updater says "no updates available" when there clearly are
-Confirm `latest.json` exists on the latest release: visit `https://github.com/drvt69talati/azmx-ai-releases/releases/latest/download/latest.json` — it should return JSON. If 404, the release didn't finalize properly. File an issue.
+Confirm `latest.json` exists on the latest release: visit `https://github.com/AzmxAI/azmx/releases/latest/download/latest.json` — it should return JSON. If 404, the release didn't finalize properly. File an issue.
 
 ### Ollama set-up dialog says "Ollama not reachable"
 1. Confirm Ollama is running: `ollama serve` in a terminal or check the Ollama app icon in the menu bar / system tray.
