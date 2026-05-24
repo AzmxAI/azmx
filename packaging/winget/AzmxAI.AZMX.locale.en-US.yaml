@@ -14,7 +14,7 @@ License: Proprietary
 LicenseUrl: https://github.com/AzmxAI/azmx/blob/main/LICENSE.md
 Copyright: Copyright (c) 2026 AzmxAI
 
-ShortDescription: An AI terminal that never sends your code to the cloud.
+ShortDescription: AZMX AI — The sovereign agent platform.
 Description: |-
   AZMX AI is a native desktop AI terminal — multi-tab PTY backend, an
   integrated code editor, a file explorer, and a first-class AI side-panel.
