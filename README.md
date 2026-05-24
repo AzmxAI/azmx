@@ -1,40 +1,50 @@
 <div align="center">
-  <h1>AZMX AI</h1>
-  <p><strong>The sovereign agent platform.</strong></p>
-  <p>
-    <a href="https://github.com/AzmxAI/azmx/releases/latest">Download</a> ·
-    <a href="SETUP.md">Install</a> ·
-    <a href="MANUAL.md">Manual</a> ·
-    <a href="FAQ.md">FAQ</a> ·
-    <a href="#extend-azmx">Extend AZMX</a>
-  </p>
+
+<!-- TODO(hero-asset): replace this with the actual logo when assets/ ships. -->
+<img src="https://azmx.ai/assets/logo.png" width="96" height="96" alt="AZMX AI" />
+
+# AZMX AI
+
+### An AI terminal that never sends your code to the cloud.
+
+Native desktop app. Bring any AI key — or run free local models. ~10&nbsp;MB. No telemetry. Keys in a `0600` file on your machine, never the OS keychain, never `localStorage`.
+
+[![Download latest](https://img.shields.io/github/v/release/AzmxAI/azmx?label=download&style=for-the-badge&color=171717)](https://github.com/AzmxAI/azmx/releases/latest)
+[![Website](https://img.shields.io/badge/website-azmx.ai-171717?style=for-the-badge)](https://azmx.ai)
+[![Discussions](https://img.shields.io/github/discussions/AzmxAI/azmx?style=for-the-badge&color=171717)](https://github.com/AzmxAI/azmx/discussions)
+
+[![Downloads](https://img.shields.io/github/downloads/AzmxAI/azmx/total?label=total%20downloads)](https://github.com/AzmxAI/azmx/releases)
+[![License](https://img.shields.io/badge/license-EULA-blue)](LICENSE.md)
+[![Platform](https://img.shields.io/badge/platform-macOS%20%C2%B7%20Linux%20%C2%B7%20Windows-lightgrey)](#install)
+[![Sponsor](https://img.shields.io/github/sponsors/AzmxAI?label=sponsor)](https://github.com/sponsors/AzmxAI)
+
 </div>
 
----
-
-AZMX AI is a native AI-first terminal that **works out of the box with free local models** — no API key, no signup, no cloud roundtrip. It pairs a real PTY backend with a modern UI: multi-tab terminals, an integrated code editor, a file explorer, and a first-class AI side-panel.
-
-Bring your own key from any major provider, or run free models locally via Ollama. The installer is ~10 MB. API keys live in a user-only (`0600`) app-local file — never in the OS keychain, `localStorage`, or plain settings. Telemetry is off by default.
-
-> The application source is proprietary and not hosted here. **This repository exists only to publish release artifacts.** Installers and the auto-updater manifest are attached to each tagged release.
-
----
-
-## Why AZMX
-
-- **Free local AI without an API key.** One-click setup of Ollama + curated coding models (Qwen2.5-Coder, Granite Code — all Apache 2.0). Your prompts never leave the machine.
-- **Or BYOK.** OpenAI, Anthropic, Google, Groq, xAI, Cerebras, DeepSeek, **NVIDIA NIM** (hosted at build.nvidia.com or self-hosted), **Azure OpenAI** (any resource + deployment), and any other OpenAI-compatible endpoint (Vertex AI, Bedrock-via-LiteLLM, …) — any one is enough to start. Keys live in a private user-only (`0600`) app-local file — never in the OS keychain, plain settings, or `localStorage`.
-- **GPU-aware agent.** When you're on an NVIDIA machine the agent can read live GPU state via `nvidia-smi` — debug OOM, pick a batch size, fit a model to your VRAM.
-- **Native, lightweight.** ~10 MB installer. No Electron. No telemetry by default.
-- **Real terminal, real editor, real explorer.** xterm.js+WebGL terminal, CodeMirror 6 editor with vim mode + inline AI autocomplete, file tree with git status badges.
-- **MCP-native.** Bundled HTTP/SSE transport, curated catalog (GitHub, Postgres, Slack, Filesystem, …), keychain-backed secrets per server. Auto-imports `.mcp.json` and `~/.claude.json`.
-- **Claude Code interop.** Reuses your `AZMX.md` / `CLAUDE.md` / `AGENTS.md`, `.claude/agents/*.md`, `.claude/commands/*.md`, and `.claude/settings.json` hooks. Drop AZMX into a project where Claude Code already lives — it adopts the config.
+<!--
+  TODO(demo-gif): record a 6–10 second screen capture of the agent doing something
+  undeniable — e.g. "explain the last error", "/init" a fresh repo, or running a
+  parallel sub-agent against a real diff. Save as assets/demo.gif (<=4 MB) and
+  uncomment the line below. This is the single highest-leverage change in the
+  whole repo for repo-visit → star conversion.
+-->
+<!-- <p align="center"><img src="assets/demo.gif" alt="AZMX AI in action" width="720" /></p> -->
 
 ---
 
-## Download
+## Install
 
-Pick the installer for your platform from the **[latest release](https://github.com/AzmxAI/azmx/releases/latest)**:
+```bash
+# macOS · Homebrew
+brew install --cask azmx
+
+# macOS / Linux · one-line installer
+curl -sSL https://azmx.ai/install | sh
+
+# Windows · winget
+winget install AzmxAI.AZMX
+```
+
+Or grab a signed installer for your platform from the **[latest release](https://github.com/AzmxAI/azmx/releases/latest)**:
 
 | Platform | File |
 | --- | --- |
@@ -43,7 +53,22 @@ Pick the installer for your platform from the **[latest release](https://github.
 | Linux | `AZMX.AI_<version>_amd64.AppImage`, `.deb`, or `.rpm` |
 | Windows | `AZMX.AI_<version>_x64_en-US.msi` or `*_x64-setup.exe` |
 
-Need help installing? See **[SETUP.md](SETUP.md)** for per-platform walkthroughs.
+Detailed walkthrough per platform: **[SETUP.md](SETUP.md)**.
+
+---
+
+## Why AZMX
+
+- **Your code stays on your machine.** AZMX never proxies AI requests through our servers. Your prompts go directly from your device to whichever provider you chose, or to a local model. We don't sit in the middle — and we can't.
+- **Free local AI without an API key.** One-click Ollama setup. Curated coding models (Qwen2.5-Coder, Granite Code, Llama, all Apache 2.0). Your code never leaves the device.
+- **Or BYOK any major provider.** OpenAI, Anthropic, Google, Groq, xAI, Cerebras, DeepSeek, NVIDIA NIM, Azure OpenAI, any OpenAI-compatible endpoint. Pick whichever, switch any time.
+- **Per-call agent approval.** The agent asks before it writes a file or runs a shell command. Configurable from Permissive to Paranoid (typed confirmation for destructive ops).
+- **Hash-chained, tamper-evident audit log.** Every tool call recorded locally. Export to your SIEM on the paid tiers.
+- **Real terminal, real editor, real file explorer.** xterm.js terminal, CodeMirror editor with vim mode + inline AI autocomplete, file tree with git badges. Not a marketing page that calls itself "the future of terminals."
+- **MCP-native.** 17-server curated catalog (GitHub, GitLab, Kubernetes, Postgres, SQLite, Redis, Slack, Drive, …). Add your own in one JSON file.
+- **~10&nbsp;MB installer. Native. No Electron.** Cold-start under a second. No telemetry, no account, no email-required-to-use.
+
+> The application source is proprietary. **This repository publishes release artifacts and user-facing docs** — installers, the auto-updater manifest, and the community contribution surfaces (skills, agents, MCP servers, snippets, translations). Source contributions land upstream and ship to you via the auto-updater.
 
 ---
 
@@ -141,9 +166,34 @@ AZMX checks for updates on launch. New versions land via the in-app updater — 
 
 ---
 
-## License
+## ⭐ Star this repo
 
-AZMX AI is free to download but proprietary. By installing the application you agree to the End User License Agreement that ships with it. The release artifacts are signed; the source repository is private.
+If AZMX saves you time, a star helps two things:
+
+1. **Other developers find it.** GitHub stars are the single biggest discovery signal for dev tools.
+2. **We know what to keep building.** Every star tells us "this is the kind of tool worth maintaining."
+
+It costs you one click and supports a small team trying to build the AI terminal we wanted for ourselves. Thank you 🙏
+
+<p align="center">
+  <a href="https://github.com/AzmxAI/azmx/stargazers"><img src="https://img.shields.io/github/stars/AzmxAI/azmx?style=social" alt="Star history"/></a>
+</p>
+
+---
+
+## Featured by
+
+<!--
+  Press / podcast / video mentions land here as they happen. Add as logo links
+  when real coverage drops — keep it sparse and credible (no "as seen on" walls
+  with 50 unverified logos).
+-->
+
+*(This space will fill in as AZMX is covered. [Tell us if you wrote about AZMX →](https://github.com/AzmxAI/azmx/discussions/new?category=show-tell))*
+
+---
+
+## License
 
 ## Support
 

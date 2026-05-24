@@ -1,0 +1,17 @@
+# Adds the "Sponsor" button to the top of github.com/AzmxAI/azmx.
+#
+# - `github`: shows up as the prominent inline ❤ Sponsor button.
+#   Comment back in once GitHub Sponsors is enabled for the AzmxAI org
+#   (it's free — Settings → Sponsors on the org page).
+# - `custom`: any sponsor URL. Doubles as a fallback so the Sponsor
+#   button works even before GitHub Sponsors is approved.
+#
+# Tier-gated paid plans go through Polar at azmx.ai/pricing, NOT here —
+# sponsoring is for users who specifically want to fund the OSS surface
+# (docs, community catalog, translations, the public skills/agents/MCP
+# folders).
+
+# github: [AzmxAI]
+custom:
+  - https://azmx.ai/sponsor
+  - https://azmx.ai/pricing
