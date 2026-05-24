@@ -1,0 +1,46 @@
+name: 💡 Feature request
+description: Suggest an improvement or new capability
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Lead with the **user pain**, not the proposed solution.
+        Concrete > abstract.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      placeholder: |
+        I work across 3 machines and currently re-add my API keys on each. It would be useful to...
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like to see?
+      description: Your proposed shape. UI sketch / flow steps.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you've considered
+  - type: dropdown
+    id: tier
+    attributes:
+      label: Which tier would benefit?
+      options:
+        - Free (everyone)
+        - Pro
+        - Teams
+        - Enterprise
+        - Not sure
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I searched existing issues + discussions and didn't find a duplicate
+          required: true

@@ -1,0 +1,20 @@
+{
+  "id": "sqlite-local",
+  "name": "SQLite (local file)",
+  "category": "data",
+  "description": "Read and query a local SQLite database file. Schema introspection, parameterized SELECT, no writes.",
+  "docsUrl": "https://github.com/modelcontextprotocol/servers/tree/main/src/sqlite",
+  "setupNote": "Point DB_PATH at your .sqlite file. AZMX never reads paths you don't approve.",
+  "transport": {
+    "kind": "stdio",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-sqlite"],
+    "secrets": [
+      {
+        "envName": "DB_PATH",
+        "label": "Absolute path to your .sqlite file",
+        "helpUrl": "https://sqlite.org/cli.html"
+      }
+    ]
+  }
+}

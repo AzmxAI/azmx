@@ -60,12 +60,52 @@ Prefer BYOK? Skip step 2's button and use the BYOK step instead. Both paths land
 
 ## Documentation
 
-| Document | Purpose |
+### Get started
+| | |
 | --- | --- |
-| **[SETUP.md](SETUP.md)** | Install per platform, troubleshooting, first-run setup |
-| **[MANUAL.md](MANUAL.md)** | Full end-to-end feature reference — every panel, every shortcut, every workflow |
-| **[FAQ.md](FAQ.md)** | Common questions: privacy, licensing, performance, model recommendations, integrations |
-| **[CHANGELOG](https://github.com/AzmxAI/azmx/releases)** | What changed in each release |
+| **[SETUP.md](SETUP.md)** | Install per platform · first-run setup |
+| **[MANUAL.md](MANUAL.md)** | Full feature reference — every panel, every shortcut |
+| **[FAQ.md](FAQ.md)** | Common questions on privacy, licensing, performance, models |
+| **[CHANGELOG.md](CHANGELOG.md)** | Release notes (per-version detail on the releases page) |
+
+### Reference
+| | |
+| --- | --- |
+| **[docs/TIERS.md](docs/TIERS.md)** | What's in Free / Pro / Teams / Enterprise |
+| **[docs/MODELS.md](docs/MODELS.md)** | Supported AI providers · BYOK · local models |
+| **[docs/CONNECTORS.md](docs/CONNECTORS.md)** | The bundled MCP catalog · custom + workspace MCP |
+| **[docs/AGENTS.md](docs/AGENTS.md)** | What the agent can + can't do · approval gates · audit log |
+| **[docs/KEYBINDINGS.md](docs/KEYBINDINGS.md)** | Every shortcut, by category |
+| **[docs/RECIPES.md](docs/RECIPES.md)** | Workflow cookbook — copy + adapt |
+| **[docs/GLOSSARY.md](docs/GLOSSARY.md)** | Terms you'll see across the docs |
+| **[docs/ROADMAP.md](docs/ROADMAP.md)** | What we're working on |
+
+### Policies + posture
+| | |
+| --- | --- |
+| **[SECURITY.md](SECURITY.md)** | Vulnerability reporting · what's protected |
+| **[PRIVACY.md](PRIVACY.md)** | What we collect (nothing, by default) · what lives where |
+| **[LICENSE.md](LICENSE.md)** | EULA pointer · third-party notices · trademarks |
+| **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)** | How we behave on this project |
+| **[CONTRIBUTING.md](CONTRIBUTING.md)** | How to engage with this repo |
+| **[docs/COMPLIANCE.md](docs/COMPLIANCE.md)** | SBOM · SOC 2 · DPA · FIPS · PIV/CAC |
+| **[docs/TELEMETRY.md](docs/TELEMETRY.md)** | What gets sent (nothing, by default) |
+| **[docs/AIRGAPPED.md](docs/AIRGAPPED.md)** | Run AZMX with zero outbound |
+
+### Operate
+| | |
+| --- | --- |
+| **[docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)** | Problem → fix, by surface |
+| **[docs/DATA_PORTABILITY.md](docs/DATA_PORTABILITY.md)** | Export · backup · move between machines |
+| **[docs/UNINSTALL.md](docs/UNINSTALL.md)** | Clean removal per platform |
+| **[docs/SUPPORT.md](docs/SUPPORT.md)** | Where to go for what |
+
+### Build with us
+| | |
+| --- | --- |
+| **[mcp-servers/](mcp-servers/)** | Community MCP connector manifests |
+| **[skills/](skills/)** | Community skills the agent can load |
+| **[guidelines/](guidelines/)** | Authoring standards for skills · MCP · translations · recipes |
 
 ---
 

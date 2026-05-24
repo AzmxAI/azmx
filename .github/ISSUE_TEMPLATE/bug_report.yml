@@ -1,0 +1,95 @@
+name: 🐛 Bug report
+description: AZMX did something it shouldn't, or didn't do something it should
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing this. Concrete repros land fixes faster.
+        **Security issues should go to security@azmx.app — not a public issue.**
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      placeholder: I opened the AI panel and typed `/init`, and the app...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect to happen?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open AZMX AI on a fresh repo
+        2. Press ⌘I to open the AI panel
+        3. Type "/init"
+        4. ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: AZMX version
+      description: Settings → About, or the title bar.
+      placeholder: v0.22.5
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - macOS — Apple Silicon
+        - macOS — Intel
+        - Linux — x86_64
+        - Linux — aarch64
+        - Windows — x86_64
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: os_version
+    attributes:
+      label: OS version
+      placeholder: macOS 15.2, Ubuntu 24.04, Windows 11 23H2…
+  - type: dropdown
+    id: provider
+    attributes:
+      label: AI provider in use
+      options:
+        - OpenAI
+        - Anthropic
+        - Google (Gemini)
+        - Groq
+        - Cerebras
+        - xAI (Grok)
+        - DeepSeek
+        - Azure OpenAI
+        - NVIDIA NIM
+        - Ollama (local)
+        - LM Studio (local)
+        - OpenAI-compatible endpoint
+        - Not applicable
+  - type: textarea
+    id: logs
+    attributes:
+      label: Agent audit log excerpt
+      description: |
+        Settings → Privacy → Agent audit log → "View recent" — paste the last ~20 lines.
+        Never include API keys.
+      render: shell
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I searched existing issues and didn't find a duplicate
+          required: true
+        - label: This is not a security issue (those go to security@azmx.app)
+          required: true

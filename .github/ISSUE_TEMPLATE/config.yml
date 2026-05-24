@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🔒 Security vulnerability
+    url: mailto:security@azmx.app
+    about: Report privately — never as a public issue. Acknowledged within 24h.
+  - name: 💬 Discussions
+    url: https://github.com/AzmxAI/azmx/discussions
+    about: Broader questions, ideas, recipes, show-and-tell.
+  - name: 📖 Documentation
+    url: https://azmx.ai/docs
+    about: Install, configure, connectors, the security model.
+  - name: 🗞️ Releases + changelog
+    url: https://github.com/AzmxAI/azmx/releases
+    about: What changed in each version.
+  - name: 💼 Sales / Enterprise
+    url: mailto:sales@azmx.app
+    about: Teams, Enterprise, custom procurement, security review.

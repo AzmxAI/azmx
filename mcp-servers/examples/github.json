@@ -1,0 +1,20 @@
+{
+  "id": "github-issues",
+  "name": "GitHub (issues + PRs)",
+  "category": "dev",
+  "description": "Read PRs, issues, and repos. Code search via your personal access token.",
+  "docsUrl": "https://github.com/modelcontextprotocol/servers/tree/main/src/github",
+  "setupNote": "Create a fine-grained token at https://github.com/settings/tokens with: Contents (read), Pull requests (read), Issues (read). Never use a classic token.",
+  "transport": {
+    "kind": "stdio",
+    "command": "npx",
+    "args": ["-y", "@modelcontextprotocol/server-github"],
+    "secrets": [
+      {
+        "envName": "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "label": "Fine-grained PAT",
+        "helpUrl": "https://github.com/settings/tokens?type=beta"
+      }
+    ]
+  }
+}

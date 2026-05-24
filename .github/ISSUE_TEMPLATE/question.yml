@@ -1,0 +1,21 @@
+name: ❓ Question
+description: How do I…, what's the recommended way to…
+title: "[Question] "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Broader chats fit better in [Discussions](https://github.com/AzmxAI/azmx/discussions).
+        Use this for focused yes/no or how-do-I questions.
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What are you trying to accomplish? What have you tried?
