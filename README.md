@@ -1,11 +1,12 @@
 <div align="center">
   <h1>AZMX AI</h1>
-  <p><strong>A fast, local-first AI terminal for macOS, Linux, and Windows.</strong></p>
+  <p><strong>The sovereign agent platform.</strong></p>
   <p>
-    <a href="https://github.com/AzmxAI/azmx/releases/latest">Download latest</a> ·
-    <a href="MANUAL.md">User manual</a> ·
-    <a href="SETUP.md">Install & setup</a> ·
-    <a href="FAQ.md">FAQ</a>
+    <a href="https://github.com/AzmxAI/azmx/releases/latest">Download</a> ·
+    <a href="SETUP.md">Install</a> ·
+    <a href="MANUAL.md">Manual</a> ·
+    <a href="FAQ.md">FAQ</a> ·
+    <a href="#extend-azmx">Extend AZMX</a>
   </p>
 </div>
 
@@ -58,6 +59,28 @@ Prefer BYOK? Skip step 2's button and use the BYOK step instead. Both paths land
 
 ---
 
+<a id="extend-azmx"></a>
+
+## 🛠 Extend AZMX
+
+**Your contribution ships to every AZMX user worldwide on next release.** No CLA. You keep copyright. You grant a permissive license. The bundled distribution gets richer every month because of community work.
+
+Five surfaces, every one of them a single Markdown (or JSON) file:
+
+| Build a … | What it is | Where to start |
+|---|---|---|
+| 🤖 **Skill** | A discipline the agent loads on demand to act like a domain expert (e.g. "Postgres query review"). One Markdown file. | [`skills/`](skills/) → [`SKILL_AUTHORING.md`](guidelines/SKILL_AUTHORING.md) |
+| 🧑‍🚀 **Sub-agent** | A specialist the main agent delegates to, with bounded tools + predictable output (e.g. `test-writer`, `migration-planner`). | [`agents/`](agents/) → [`AGENT_AUTHORING.md`](guidelines/AGENT_AUTHORING.md) |
+| 🔌 **MCP connector** | A new tool the agent can call — bridge to your service, your data, your internal CLI. | [`mcp-servers/`](mcp-servers/) → [`MCP_AUTHORING.md`](guidelines/MCP_AUTHORING.md) |
+| ✨ **Snippet** | A pre-baked prompt template accessible via `#name` in the composer. | [`snippets/`](snippets/) → [`SNIPPET_AUTHORING.md`](guidelines/SNIPPET_AUTHORING.md) |
+| 🌍 **Translation** | The onboarding card in your language — 5 seeded, ~10 priority next. | [`TRANSLATIONS.md`](guidelines/TRANSLATIONS.md) |
+
+**Plus:** add a [recipe](docs/RECIPES.md) to the cookbook, fix a doc, or [showcase](guidelines/SHOWCASE.md) someone else's work.
+
+Every contributor gets credit in release notes. Featured contributors get a complimentary Pro license; repeat featured contributors get Teams. **[Read the principles →](guidelines/README.md)**
+
+---
+
 ## Documentation
 
 ### Get started
@@ -103,9 +126,12 @@ Prefer BYOK? Skip step 2's button and use the BYOK step instead. Both paths land
 ### Build with us
 | | |
 | --- | --- |
+| **[skills/](skills/)** | Community skills the agent can load (`load_skill("…")`) |
+| **[agents/](agents/)** | Community sub-agents the main agent delegates to |
 | **[mcp-servers/](mcp-servers/)** | Community MCP connector manifests |
-| **[skills/](skills/)** | Community skills the agent can load |
-| **[guidelines/](guidelines/)** | Authoring standards for skills · MCP · translations · recipes |
+| **[snippets/](snippets/)** | Community prompt snippets (`#name` in the composer) |
+| **[guidelines/](guidelines/)** | Authoring standards for every contribution kind |
+| **[guidelines/SHOWCASE.md](guidelines/SHOWCASE.md)** | Featured community contributions |
 
 ---
 
