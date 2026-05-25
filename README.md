@@ -7,8 +7,6 @@
 
 ### The sovereign agent platform.
 
-Native desktop AI terminal. Bring any AI key — or run free local models. ~10&nbsp;MB. No telemetry. Keys in a `0600` file on your machine, never the OS keychain, never `localStorage`.
-
 [![Download latest](https://img.shields.io/github/v/release/AzmxAI/azmx?label=download&style=for-the-badge&color=171717)](https://github.com/AzmxAI/azmx/releases/latest)
 [![Website](https://img.shields.io/badge/website-azmx.ai-171717?style=for-the-badge)](https://azmx.ai)
 [![Discussions](https://img.shields.io/github/discussions/AzmxAI/azmx?style=for-the-badge&color=171717)](https://github.com/AzmxAI/azmx/discussions)
