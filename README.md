@@ -11,7 +11,6 @@
 [![Website](https://img.shields.io/badge/website-azmx.ai-171717?style=for-the-badge)](https://azmx.ai)
 [![Discussions](https://img.shields.io/github/discussions/AzmxAI/azmx?style=for-the-badge&color=171717)](https://github.com/AzmxAI/azmx/discussions)
 
-[![Downloads](https://img.shields.io/github/downloads/AzmxAI/azmx/total?label=total%20downloads)](https://github.com/AzmxAI/azmx/releases)
 [![License](https://img.shields.io/badge/license-EULA-blue)](LICENSE.md)
 [![Platform](https://img.shields.io/badge/platform-macOS%20%C2%B7%20Linux%20%C2%B7%20Windows-lightgrey)](#install)
 [![Sponsor](https://img.shields.io/github/sponsors/AzmxAI?label=sponsor)](https://github.com/sponsors/AzmxAI)
