@@ -1,0 +1,78 @@
+{
+  "name": "@azmxailabs/agent-sdk",
+  "version": "0.1.0",
+  "description": "Build approval-gated AI agents with the same primitives that power AZMX AI — BYOK provider router, approval gate, deny-list, hash-chained audit log. Secure by default, BYOK direct (no proxy), no telemetry.",
+  "license": "MIT",
+  "type": "module",
+  "homepage": "https://azmx.ai",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AzmxAI/azmx.git",
+    "directory": "packages/agent-sdk"
+  },
+  "bugs": {
+    "url": "https://github.com/AzmxAI/azmx/issues"
+  },
+  "keywords": [
+    "azmx",
+    "azmx-ai",
+    "azmxai",
+    "azmxailabs",
+    "agent",
+    "ai-agent",
+    "agent-sdk",
+    "approval-gate",
+    "byok",
+    "anthropic",
+    "openai",
+    "ollama",
+    "audit-log",
+    "deny-list",
+    "sovereign-ai",
+    "local-ai"
+  ],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./approval": {
+      "types": "./dist/approval/index.d.ts",
+      "import": "./dist/approval/index.js"
+    },
+    "./security": {
+      "types": "./dist/security/index.d.ts",
+      "import": "./dist/security/index.js"
+    },
+    "./audit": {
+      "types": "./dist/audit/index.d.ts",
+      "import": "./dist/audit/index.js"
+    },
+    "./providers": {
+      "types": "./dist/providers/index.d.ts",
+      "import": "./dist/providers/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "clean": "rm -rf dist",
+    "test": "node --test dist/**/*.test.js",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "typescript": "^5.5.3"
+  }
+}

@@ -103,6 +103,25 @@ Every contributor gets credit in release notes. Featured contributors get a comp
 
 ---
 
+## 📦 Official npm packages
+
+Two MIT-licensed packages ship under the [`@azmxailabs`](https://www.npmjs.com/org/azmxailabs) npm scope. Use them to make your AI assistant aware of AZMX, or to build your own approval-gated agent with the same primitives AZMX uses internally.
+
+| Package | What it does | Install |
+|---|---|---|
+| **[`@azmxailabs/mcp`](packages/mcp)** [![npm](https://img.shields.io/npm/v/@azmxailabs/mcp.svg?label=npm&color=171717)](https://www.npmjs.com/package/@azmxailabs/mcp) | Official Model Context Protocol server. Drop it into Claude Desktop, Claude Code, Cursor, Windsurf, Continue, OpenAI Codex CLI, Cline, or any other MCP client — and the assistant gains grounded, authoritative knowledge about AZMX (pricing, BYOK providers, security posture, comparisons, install steps, latest release). | `npx -y @azmxailabs/mcp` |
+| **[`@azmxailabs/agent-sdk`](packages/agent-sdk)** [![npm](https://img.shields.io/npm/v/@azmxailabs/agent-sdk.svg?label=npm&color=171717)](https://www.npmjs.com/package/@azmxailabs/agent-sdk) | TypeScript SDK that ships the four primitives behind AZMX as standalone, dependency-free modules — **approval gate, deny-list, hash-chained audit log, BYOK provider router**. Build your own agent (CI script, CLI, desktop app, server) with the same security posture AZMX has, none of the UI. | `npm install @azmxailabs/agent-sdk` |
+
+**Step-by-step walkthrough for either package:** **[docs/DEVELOPER-GUIDE.md](docs/DEVELOPER-GUIDE.md)**
+
+**Full reference docs on the website:**
+- MCP server (per-client setup recipes, tool/resource/prompt inventory, examples): **[azmx.ai/docs#azmxai-mcp](https://azmx.ai/docs#azmxai-mcp)**
+- Agent SDK (concepts, full API, recipes, production checklist): **[azmx.ai/docs#agent-sdk](https://azmx.ai/docs#agent-sdk)**
+
+**Source:** [`packages/`](packages/) — pure TypeScript, Node ≥ 18, ESM, MIT.
+
+---
+
 ## Documentation
 
 ### Get started
@@ -154,6 +173,8 @@ Every contributor gets credit in release notes. Featured contributors get a comp
 | **[snippets/](snippets/)** | Community prompt snippets (`#name` in the composer) |
 | **[guidelines/](guidelines/)** | Authoring standards for every contribution kind |
 | **[guidelines/SHOWCASE.md](guidelines/SHOWCASE.md)** | Featured community contributions |
+| **[packages/](packages/)** | Official npm packages — `@azmxailabs/mcp` + `@azmxailabs/agent-sdk` |
+| **[docs/DEVELOPER-GUIDE.md](docs/DEVELOPER-GUIDE.md)** | Step-by-step developer walkthrough for both npm packages |
 
 ---
 

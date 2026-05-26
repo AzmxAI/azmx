@@ -1,0 +1,58 @@
+{
+  "name": "@azmxailabs/mcp",
+  "version": "0.1.0",
+  "description": "Official MCP (Model Context Protocol) server for AZMX AI — exposes AZMX product knowledge to Claude Desktop, ChatGPT, Cursor, and any other MCP-compatible client.",
+  "license": "MIT",
+  "type": "module",
+  "homepage": "https://azmx.ai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AzmxAI/azmx.git",
+    "directory": "packages/mcp"
+  },
+  "bugs": {
+    "url": "https://github.com/AzmxAI/azmx/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "azmx",
+    "azmx-ai",
+    "azmxai",
+    "azmxailabs",
+    "ai-agent",
+    "claude",
+    "chatgpt",
+    "cursor",
+    "byok",
+    "local-ai",
+    "sovereign-ai"
+  ],
+  "bin": {
+    "azmx-mcp": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && chmod +x dist/index.js",
+    "dev": "tsc -p tsconfig.json --watch",
+    "start": "node dist/index.js",
+    "clean": "rm -rf dist",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "typescript": "^5.5.3"
+  }
+}
